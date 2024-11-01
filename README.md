@@ -150,8 +150,8 @@ The Jenkins pipeline is defined in a Jenkinsfile at the root of the repository.
 **Challenges Faced**
 --------------------
 
-**· Using Httpx**: The asynchronous nature of httpx posed challenges while using asyncio.
+**. Using Httpx**: Implementing Httpx for asynchronous operations with pytest.asyncio presented challenges, as it required careful handling to ensure proper test execution.
 
-**· Mocking Database Connections**: Careful setup was required to mock the SQLite database and prevent data persistence issues between tests.
+**· Coverage Maintenance**: Ensuring 80% code coverage required thorough testing across all application logic, including edge cases.
 
-**· Coverage Maintenance**: Achieving 80% code coverage necessitated testing all edge cases and paths in the application’s logic.
+**· Efficient SQLModel Setup**: Configuring an efficient SQLModel fixture was essential for clean and isolated test environments, allowing for streamlined test case execution.
