@@ -7,6 +7,7 @@ from bookstore.database import engine
 
 @pytest.fixture(scope="session",autouse=True)
 def setup_database():
+    """ Drop the data and create the data """
     SQLModel.metadata.drop_all(bind=engine)
     SQLModel.metadata.create_all(bind=engine)
     yield

@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Clone the repository'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/syed-dillu/bookstore.git']])
+            }
+        }
+        stage('Setup Environment'){
+            steps {
+                echo 'Setup Environment and install requirements'
+                bat '''python -m venv venv
+                call venv/Scripts/activate.bat
+                pip install -r requirement.txt'''
+            }
+        }
+        stage('Run Unit and Integration Tests with Coverage') {
+            steps {
+                echo "Running unit tests and generating coverage report..."
+                bat '''
+                call venv/Scripts/activate.bat
+                pytest
+                '''
+            }
+        }
+      
+        stage('Publish Coverage Report') {
+            steps {
+                echo 'Publishing coverage report...'
+                archiveArtifacts artifacts: 'reports/coverage_report/**', allowEmptyArchive: true
+            }
+        }
+        stage('Publish Allure Report') {
+            steps {
+                echo "Generate the allure report"
+                allure([
+                    results: [[path: 'reports/allure-results']],
+                    report: 'reports/allure-report'
+                ])
+            }
+        }
+    }
+    post {
+        always {
+            echo "Cleaning up workspace..."
+            cleanWs()
+        }
+    }
+}

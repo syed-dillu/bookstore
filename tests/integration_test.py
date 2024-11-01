@@ -22,6 +22,9 @@ async def test_signup() -> None:
         assert response.json() == {"message": "User created successfully"}
         log_info(f"Server response : {response.text}")
 
+
+
+
 @allure.title("User Login")
 @allure.severity(allure.severity_level.NORMAL)
 @allure.description("Test case for user login functionality.")
@@ -36,6 +39,8 @@ async def test_login()  -> str:
         assert "access_token" in response.json()
         log_info("User logged in with email: testuser@example.com")
         return response.json()["access_token"]
+
+
 
 @allure.title("Create Book")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -57,6 +62,8 @@ async def test_create_book()  -> str:
         log_info(f"Book created with name: {response.json()['name']}")
         return access_token,response.json()["id"] 
 
+
+
 @allure.title("Update Book")
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.description("Test case for updating a book's details.")
@@ -73,6 +80,8 @@ async def test_update_book()  -> None :
         log_info(f"Server response : {response.text}")
         log_info(f"Book updated with ID: {book_id}")
 
+
+
 @allure.title("Get Book by ID")
 @allure.severity(allure.severity_level.NORMAL)
 @allure.description("Test case for retrieving a book by its ID.")
@@ -86,6 +95,8 @@ async def test_get_book_by_id() -> None :
         log_info(f"Server response : {response.text}")
         log_info(f"Retrieved book with ID: {book_id}")
 
+
+
 @allure.title("Get All Books")
 @allure.severity(allure.severity_level.NORMAL)
 @allure.description("Test case for retrieving all books.")
@@ -98,6 +109,8 @@ async def test_get_all_books() -> None :
         assert isinstance(response.json(), list)
         log_info(f"Server response : {response.text}")
         log_info("Retrieved all books.")
+
+
 
 @allure.title("Delete Book")
 @allure.severity(allure.severity_level.CRITICAL)
