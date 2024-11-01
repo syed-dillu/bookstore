@@ -2,10 +2,13 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+import os
+import sys
+sys.path.append(os.getcwd())
 
-from database import Book  # Assuming this is defined in your models.py
-from database import get_db
-from middleware import JWTBearer
+from bookstore.database import Book  # Assuming this is defined in your models.py
+from bookstore.database import get_db
+from bookstore.middleware import JWTBearer
 
 router = APIRouter()
 

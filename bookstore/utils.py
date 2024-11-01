@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
-
+import os
+import sys
+sys.path.append(os.getcwd())
 import jwt
 
-from constants import ALGORITHM, SECRET_KEY
+from bookstore.constants import ALGORITHM, SECRET_KEY
 
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
