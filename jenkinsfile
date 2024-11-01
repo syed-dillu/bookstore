@@ -37,7 +37,8 @@ pipeline {
                 echo "Generate the allure report"
                 allure([
                     results: [[path: 'reports/allure-results']],
-                    report: 'reports/allure-report'
+                    report: 'reports/allure-report',
+                    allowEmptyArchive: true
                 ])
             }
         }
